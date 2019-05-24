@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 
-package Testing;
+package pizzagame;
+
+
 
 /**
  * Customer.java -
@@ -36,10 +38,7 @@ public class Customer extends Person {
     }
   
     public  void order() {
-        doughType = Engine.random(low, high); //remebers the number its going to check by the numbers if the order is correct
-       
-        System.out.println(Dough.toString(doughType)+Cheese.toString(Engine.random(low, high))
-                + Toppings.toString(Engine.random(low, high)) + Sauce.toString(Engine.random(low, high))); // 
+        
     
     }   
 }

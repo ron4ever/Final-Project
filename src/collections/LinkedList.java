@@ -130,13 +130,13 @@ public class LinkedList <T> {
      public String toString() {
         if (isEmpty()) return "Empty Linked List";
         else{
-           String text = "Linked List [";
+           String text = "";
             Node current = head;
             while (current.next != null){
                 text += current.toString() + ",";
                 current = current.next;  
             }
-            return text + current.toString() + "]";
+            return text + current.toString();
         }
      }
      /**

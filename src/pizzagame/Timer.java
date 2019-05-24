@@ -4,20 +4,23 @@
  * and open the template in the editor.
  */
 
-package Testing;
+package pizzagame;
 
 /**
- * Game.java -
+ * Timer.java -
  * 
- * @since 9-Apr-2019 
+ * @since 10-Apr-2019 
  * @author r.stuchevsky
  */
-public class Game {
-    
-    /**   
+public class Timer {
+     /**   
      * Default constructor for the class, sets class properties
      */
-     public Game() {
-        Engine engine = new Engine();
+     public Timer() {
+        
      }
+
+     
+
+
 }

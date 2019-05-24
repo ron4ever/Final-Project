@@ -6,7 +6,8 @@
 
 package finalproject;
 
-import Testing.Game;
+import pizzagame.Engine;
+
 
 /**
  * FinalProject.java - 
@@ -20,7 +21,7 @@ public class FinalProject {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Game game = new Game();
+       Engine engine = new Engine();
         
     }
 

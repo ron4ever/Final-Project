@@ -1,4 +1,4 @@
-package Testing;
+package pizzagame;
 /**
  * VIP.java - extends customer
  * 
@@ -49,8 +49,9 @@ public class VIP extends Person{
 
     @Override
     public  void order() {
-        System.out.println(Dough.toString(Engine.random(low, high))+Cheese.toString(Engine.random(low, high))
-                + Toppings.toString(Engine.random(low, high)) + Sauce.toString(Engine.random(low, high))+Toppings.toString(Engine.random(low, high))); // has extra topping
+        
+        
+        
     }
 
 

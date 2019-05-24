@@ -4,28 +4,40 @@
  * and open the template in the editor.
  */
 
-package Testing;
+package pizzagame;
 
 /**
- * Cheese.java -
+ * Person.java -
  * 
  * @since 10-Apr-2019 
  * @author r.stuchevsky
  */
-public class Cheese extends Food {
-    public static final String[] CHEESETYPES = {
-        "Mozzarela","Swiss","Old-Fort",
-        "Cheddar","Provolone","Parmigian","Feta"};
-    public int choice;
-    /**   
-     * Default constructor for the class, sets class properties
-     */
-     public Cheese(int choice) {
-        this.choice = choice;
-         
-         
+public abstract class Person {
+    protected int time; // Need timer class, Should be a random between 15-45 seconds
+    protected int order; // the full order that a customer has 
+    private int money;
+    
+     public Person() {
+        
      }
-
+     
+     public void leave(){ //when timer runs out should be abstract
+         System.out.println("Yuk im leaving"); 
+     }
+     
+     public abstract void order();
+     
+     public int getMoney(){
+         return money;
+     }
+     
+     public int setMoney(int money){
+         this.money = money;
+         return money; 
+     }
+     
+     
+    
      /**
      * String representation of this object
      *
@@ -33,7 +45,7 @@ public class Cheese extends Food {
      */
      @Override
      public String toString() {
-        return "Cheese " + super.toString();
+        return "Person " + super.toString();
      }
      
      /**
@@ -53,17 +65,11 @@ public class Cheese extends Food {
      * @return a "clone" of the object using new memory
      */
      @Override
-     public Cheese clone() {
+     public Person clone() {
      return this;
      }
- /**
-     * String representation of this object
-     *
-     * @return The object represented as a String
-     */
-     public static String toString(int type) {
-        return "cheese is " + CHEESETYPES[type] + " ";
-     }
-     
 
+     public abstract void TimeUntilAngry();
+     
+     
 }
