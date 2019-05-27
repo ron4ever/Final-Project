@@ -10,25 +10,45 @@ import collections.LinkedList;
  * @author r.stuchevsky
  */
 public class Engine{
-     public Engine() {
-     String[] cheeses = {
+    //properties of the class
+    private final int low = 0;
+    private final int high = 5;
+    private final String[] cheeses = {
         "Mozzarela","Swiss","Old-Fort",
         "Cheddar","Provolone","Parmigian","Feta"};
-     
-     
-     
-     LinkedList<String> doughTypes = new LinkedList<>();
-     LinkedList<String> toppingTypes = new LinkedList<>();
-     LinkedList<String> cheeseTypes = new LinkedList<>(cheeses);
-     LinkedList<String> sauceTypes = new LinkedList<>();
-        
+    private final String[] doughs ={"FullGrain","Thick","Thin","Soft","Italian","Cheese Fill"};
+    private final String[] toppings ={"Peperoni","Ham","Salami","Pineapple",
+        "Mushrooms","Peppers"};
+    private final String[] sauces ={"Italian","Home-Made","American","Spicy",
+        "Louisana","Chipotle"};
+    protected LinkedList<String> doughTypes = new LinkedList<>(doughs);
+    protected LinkedList<String> toppingTypes = new LinkedList<>(toppings);
+    protected LinkedList<String> cheeseTypes = new LinkedList<>(cheeses);
+    protected LinkedList<String> sauceTypes = new LinkedList<>(sauces); 
+    /**
+     * Constructor of the class sets userList and customer order
+     */
+    public Engine() {
+     UI ui = new UI();
+        LinkedList<String> userList = new LinkedList<>();
+        Customer customer = new Customer();
+       LinkedList<String> order = customer.order(doughTypes, cheeseTypes, sauceTypes, toppingTypes);
+        LinkedList<String> order1 = customer.order(doughTypes, cheeseTypes, sauceTypes, toppingTypes);
+       
        
         
-        
      } 
-
+    
+   
+     //Change equals method
+     //Timer
+    //UI
+    //graphics
+     
+     
+     
     //ai will create linked list of ingridients from the classes called order there is going to be 2 types
-    //normalOrder and vipOrder
+    //normalOrder and vipOrder - noice
      //player will need to complete them by using buttons in a select time
      //liked list will only check for the size and if the items are all thre in no particular order
      //if all the items are there the player will be rewared mney which will be displayed

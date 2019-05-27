@@ -6,6 +6,8 @@
 
 package pizzagame;
 
+import collections.LinkedList;
+
 /**
  * Person.java -
  * 
@@ -25,7 +27,7 @@ public abstract class Person {
          System.out.println("Yuk im leaving"); 
      }
      
-     public abstract void order();
+     
      
      public int getMoney(){
          return money;
@@ -69,7 +71,8 @@ public abstract class Person {
      return this;
      }
 
-     public abstract void TimeUntilAngry();
-     
+     public abstract void timeUntilAngry();
+     public abstract LinkedList<String> order(LinkedList<String> doughTypes,
+             LinkedList<String> cheeseTypes,LinkedList<String> sauceTypes,LinkedList<String> toppingTypes);
      
 }

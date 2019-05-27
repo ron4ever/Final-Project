@@ -6,6 +6,9 @@
 
 package pizzagame;
 
+import collections.LinkedList;
+import static pizzagame.Engine.random;
+
 
 
 /**
@@ -31,14 +34,22 @@ public class Customer extends Person {
          setMoney(20); //amount of money gievn on success
          //and timer
      }
-    @Override
-    public void TimeUntilAngry() {
-       
-        
-    }
   
-    public  void order() {
-        
-    
-    }   
+
+    @Override
+    public void timeUntilAngry() {
+       
+    }
+
+   
+
+    @Override
+    public LinkedList<String> order(LinkedList<String> doughTypes, LinkedList<String> cheeseTypes, LinkedList<String> sauceTypes, LinkedList<String> toppingTypes) {
+        LinkedList<String> order = new LinkedList<>();
+        order.add(doughTypes.get(random(low, high)));
+        order.add(sauceTypes.get(random(low, high)));
+        order.add(cheeseTypes.get(random(low, high)));
+        order.add(toppingTypes.get(random(low, high)));
+        return order;
+    }
 }
