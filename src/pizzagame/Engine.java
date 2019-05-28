@@ -40,9 +40,10 @@ public class Engine{
      } 
     
    
-     //Change equals method
-     //Timer
-    //UI
+    
+    //UI - button adds ingirdient to the userlist
+    //method to earase userlist
+    //hearts?
     //graphics
      
      

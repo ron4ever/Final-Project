@@ -5,20 +5,29 @@
  */
 package pizzagame;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
+
 /**
  *
  * @author r.stuchevsky
  */
 public class UI extends javax.swing.JFrame {
 
+    private int time = 25;
+    
     /**
      * Creates new form UI
      */
     public UI() {
        
-       this.setVisible(true);
+        setup();
+       timer.start();
+        this.setVisible(true);
        initComponents();
-        
+       
     }
     
     /**
@@ -57,6 +66,7 @@ public class UI extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        lblTimer = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -169,10 +179,15 @@ public class UI extends javax.swing.JFrame {
         getContentPane().add(jLabel7);
         jLabel7.setBounds(20, 130, 250, 110);
 
+        lblTimer.setText("jLabel8");
+        getContentPane().add(lblTimer);
+        lblTimer.setBounds(330, 190, 110, 70);
+        lblTimer.getAccessibleContext().setAccessibleName("");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-   
+   private Timer timer;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -202,5 +217,24 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel lblTimer;
     // End of variables declaration//GEN-END:variables
+
+    private void setup(){
+        
+        
+        timer = new Timer(1000, new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                time--;
+                lblTimer.setText(Integer.toString(time));
+                if (time == 0) { 
+                    JOptionPane.showMessageDialog(null, "bruh");
+                    System.exit(0);
+            }
+            } //else if order correct reset timer time = 25;
+        });
+    
+    }
+
 }
