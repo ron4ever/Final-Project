@@ -21,7 +21,7 @@ public class Engine{
         "Mushrooms","Peppers"};
     private final String[] sauces ={"Italian","Home-Made","American","Spicy",
         "Louisana","Chipotle"};
-    protected LinkedList<String> doughTypes = new LinkedList<>(doughs);
+    public LinkedList<String> doughTypes = new LinkedList<>(doughs);
     protected LinkedList<String> toppingTypes = new LinkedList<>(toppings);
     protected LinkedList<String> cheeseTypes = new LinkedList<>(cheeses);
     protected LinkedList<String> sauceTypes = new LinkedList<>(sauces); 
@@ -29,23 +29,27 @@ public class Engine{
      * Constructor of the class sets userList and customer order
      */
     public Engine() {
-     UI ui = new UI();
-        LinkedList<String> userList = new LinkedList<>();
-        Customer customer = new Customer();
+       
+       Customer customer = new Customer();
+       VIP vip = new VIP();
+       
+       UI ui = new UI();
        LinkedList<String> order = customer.order(doughTypes, cheeseTypes, sauceTypes, toppingTypes);
-        LinkedList<String> order1 = customer.order(doughTypes, cheeseTypes, sauceTypes, toppingTypes);
+       LinkedList<String> order1 = customer.order(doughTypes, cheeseTypes, sauceTypes, toppingTypes);
        
        
         
      } 
     
-   
-    
+    //Welcome UI screen with a play btn instructions and exit
+    //how to put picture in the label
+    //recursion?
+    //music
     //UI - button adds ingirdient to the userlist
     //method to earase userlist
     //hearts?
     //graphics
-     
+    //money 
      
      
     //ai will create linked list of ingridients from the classes called order there is going to be 2 types

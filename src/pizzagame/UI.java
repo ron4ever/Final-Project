@@ -5,6 +5,8 @@
  */
 package pizzagame;
 
+import collections.LinkedList;
+import collections.Node;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -15,7 +17,7 @@ import javax.swing.Timer;
  * @author r.stuchevsky
  */
 public class UI extends javax.swing.JFrame {
-
+    public  LinkedList<String> userList = new LinkedList<>();
     private int time = 25;
     
     /**
@@ -23,10 +25,11 @@ public class UI extends javax.swing.JFrame {
      */
     public UI() {
        
-        setup();
+       setup();
        timer.start();
-        this.setVisible(true);
+       this.setVisible(true);
        initComponents();
+       
        
     }
     
@@ -41,11 +44,11 @@ public class UI extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnDough1 = new javax.swing.JButton();
+        btnDough2 = new javax.swing.JButton();
+        btnDough3 = new javax.swing.JButton();
+        btnDough4 = new javax.swing.JButton();
+        btnDough5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
@@ -79,25 +82,30 @@ public class UI extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(430, 40, 240, 160);
 
-        jButton1.setText("jButton1");
-        getContentPane().add(jButton1);
-        jButton1.setBounds(90, 280, 73, 23);
+        btnDough1.setText("Full Grain");
+        btnDough1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDough1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnDough1);
+        btnDough1.setBounds(90, 280, 80, 23);
 
-        jButton2.setText("jButton2");
-        getContentPane().add(jButton2);
-        jButton2.setBounds(90, 320, 73, 23);
+        btnDough2.setText("jButton2");
+        getContentPane().add(btnDough2);
+        btnDough2.setBounds(90, 320, 73, 23);
 
-        jButton3.setText("jButton3");
-        getContentPane().add(jButton3);
-        jButton3.setBounds(90, 360, 73, 23);
+        btnDough3.setText("jButton3");
+        getContentPane().add(btnDough3);
+        btnDough3.setBounds(90, 360, 73, 23);
 
-        jButton4.setText("jButton4");
-        getContentPane().add(jButton4);
-        jButton4.setBounds(90, 400, 73, 23);
+        btnDough4.setText("jButton4");
+        getContentPane().add(btnDough4);
+        btnDough4.setBounds(90, 400, 73, 23);
 
-        jButton5.setText("jButton5");
-        getContentPane().add(jButton5);
-        jButton5.setBounds(90, 440, 73, 23);
+        btnDough5.setText("jButton5");
+        getContentPane().add(btnDough5);
+        btnDough5.setBounds(90, 440, 73, 23);
 
         jButton6.setText("jButton6");
         getContentPane().add(jButton6);
@@ -187,10 +195,18 @@ public class UI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnDough1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDough1ActionPerformed
+       userList.add("Full Grain");
+    }//GEN-LAST:event_btnDough1ActionPerformed
+
    private Timer timer;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnDough1;
+    private javax.swing.JButton btnDough2;
+    private javax.swing.JButton btnDough3;
+    private javax.swing.JButton btnDough4;
+    private javax.swing.JButton btnDough5;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
@@ -201,11 +217,7 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton19;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
