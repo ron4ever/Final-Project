@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package finalproject;
-
-import pizzagame.Engine;
-
-
+import pizzagame.Menu;
 /**
  * FinalProject.java - 
  * 
@@ -16,13 +7,10 @@ import pizzagame.Engine;
  * @author r.stuchevsky
  */
 public class FinalProject {
-
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       Engine engine = new Engine();
-        
+        Menu menu = new Menu(); //starts up the greeting ui
     }
-
 }

@@ -13,10 +13,10 @@ public class Engine{
     //properties of the class
     private final int low = 0;
     private final int high = 5;
+    private final String[] doughs ={"FullGrain","Thick","Thin","Soft","Italian","Cheese Fill"};
     private final String[] cheeses = {
         "Mozzarela","Swiss","Old-Fort",
         "Cheddar","Provolone","Parmigian","Feta"};
-    private final String[] doughs ={"FullGrain","Thick","Thin","Soft","Italian","Cheese Fill"};
     private final String[] toppings ={"Peperoni","Ham","Salami","Pineapple",
         "Mushrooms","Peppers"};
     private final String[] sauces ={"Italian","Home-Made","American","Spicy",
@@ -35,29 +35,29 @@ public class Engine{
        
        UI ui = new UI();
        LinkedList<String> order = customer.order(doughTypes, cheeseTypes, sauceTypes, toppingTypes);
-       LinkedList<String> order1 = customer.order(doughTypes, cheeseTypes, sauceTypes, toppingTypes);
-       
-       
-        
+       LinkedList<String> orderVIP = vip.order(doughTypes, cheeseTypes, sauceTypes, toppingTypes);
+        System.out.println(order);
+        System.out.println(orderVIP);
      } 
     
-    //Welcome UI screen with a play btn instructions and exit
-    //how to put picture in the label
+    //ui title of game 
+    //right display size
+    //Welcome UI screen with a play btn instructions and exit and credits title with the 2names and i wanna be mercy - done
+    //how to put picture in the label - done (icon) (and it has to be in package)
     //recursion?
     //music
-    //UI - button adds ingirdient to the userlist
-    //method to earase userlist
+    //UI - button adds ingirdient to the userlist (in progress)
+    //method to earase userlist - done (finalize)
     //hearts?
     //graphics
     //money 
-     
+     //At the start of the game player could choose his name that will also be displayed
      
     //ai will create linked list of ingridients from the classes called order there is going to be 2 types
     //normalOrder and vipOrder - noice
      //player will need to complete them by using buttons in a select time
      //liked list will only check for the size and if the items are all thre in no particular order
      //if all the items are there the player will be rewared mney which will be displayed
-     //OPTIONAL: player will have 45 seconds to complete order but timer class needs to be build and used (idk how)
      //At the start of the game player could choose his name that will also be displayed
      //game ends when a) player fails to complete an order or b)(prefered) timer runs out
      // OPTIONAL player has 3 hearts if player fails an order one heart goes down until game ends
