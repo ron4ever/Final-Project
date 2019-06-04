@@ -17,22 +17,14 @@ import static pizzagame.Engine.random;
  * @since 10-Apr-2019 
  * @author r.stuchevsky
  */
-public class Customer extends Person {
-    int doughType;
-    int cheeseType;
-    int toppingType;
-    int sauceType;
-    
-    int high = 5;
-    int low = 0;
+public class Customer extends Person implements PizzaOrder {
+   
     
     /**   
      * Default constructor for the class, sets class properties
      */
      public Customer() {
-        //random between 15-45 sec time
-         setMoney(20); //amount of money gievn on success
-         //and timer
+     
      }
   
 
@@ -52,4 +44,6 @@ public class Customer extends Person {
         order.add(toppingTypes.get(random(low, high)));
         return order;
     }
+    
+    
 }

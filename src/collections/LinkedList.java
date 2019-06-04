@@ -133,7 +133,7 @@ public class LinkedList <T> {
            String text = "";
             Node current = head;
             while (current.next != null){
-                text += current.toString() + ",";
+                text += current.toString() + " ,";
                 current = current.next;  
             }
             return text + current.toString();
@@ -160,6 +160,7 @@ public class LinkedList <T> {
          return true;
      }
     
+     
      
      /**
      * Createss a duplicate object using new memory
@@ -504,5 +505,15 @@ public class LinkedList <T> {
         for (int i = 0; i < that.size(); i++) {
             this.add(that.get(i));
         }
+    }
+    /**
+     * Overloads the toString method of the class
+     * @param order
+     * @return 
+     */
+    public String toString(LinkedList<String> order) {
+        String text = "I want ";
+           String end = " on my pizza."; 
+            return text + order.toString() + end; 
     }
 }
