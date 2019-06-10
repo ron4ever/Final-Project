@@ -5,26 +5,27 @@
  */
 
 package Tools;
-
-/** required imports */
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-
 /**
- * GameImage.java - represents a box to display an image in a container for
- * a user interface and useful methods
- *
- * @author Mr. Wachs 
- * @since 14-May-2019 
+ * GameImage.java -
+ * 
+ * @since 5-Jun-2019 
+ * @author r.stuchevsky
  */
-public class GameImage 
-{
-    
+public class GameImage {
     private JLabel    label;
     private String    imageFile;
     private ImageIcon icon;
@@ -57,7 +58,7 @@ public class GameImage
      * @param background the background color of the label
      */
     public GameImage(JLabel label, String text, Color background) {
-        this.label = label;                         // set parameter to property
+        setLabel(label);                            // set parameter to property
         setDebug(text,background);                  // set debug mode
     }
     
@@ -68,8 +69,25 @@ public class GameImage
      * @param imageFile the relative image filename to display
      */
     public GameImage(JLabel label, String imageFile) {
-        this.label = label;                         // set parameter to property
+        setLabel(label);                            // set parameter to property
         setImage(imageFile);                        // set image
+        resizeToContainer();                        // resize
+    }
+    
+    /**
+     * Constructor for the class, sets class properties
+     * 
+     * @param label the label used to display the image
+     * @param spriteSheet imageFile the new image file to change the label to
+     * @param x the x coordinate of the sprite sheet frame location
+     * @param y the y coordinate of the sprite sheet frame location
+     * @param width the width of the sprite sheet frame
+     * @param height the height coordinate of the sprite sheet frame 
+     */
+    public GameImage(JLabel label, String spriteSheet, int x, int y, 
+                     int width, int height) {
+        setLabel(label);                            // set parameter to property
+        setImage(spriteSheet, x, y, width, height); // set image from sheet
         resizeToContainer();                        // resize
     }
       
@@ -109,6 +127,33 @@ public class GameImage
         label.setIcon(icon);                            // set icon to label
     }
     
+    /**
+     * Update the coordinates of the GameImage current location data
+     * 
+     * @param coordinates the coordinates object to update
+     */
+    public void update(Coordinates coordinates) {
+        if (coordinates == null) coordinates = new Coordinates();
+        coordinates.x      = label.getX();
+        coordinates.y      = label.getY();
+        coordinates.width  = label.getWidth();
+        coordinates.height = label.getHeight();
+        coordinates.recalculate();
+    }
+    
+    /**
+     * Re-positions GameImage in it's container based on coordinate data 
+     * 
+     * @param coordinates the coordinates object to re-position to
+     */
+    public void redraw(Coordinates coordinates) {
+        if (coordinates == null) return;            // error trap
+        int x = coordinates.x;
+        int y = coordinates.y;
+        int w = coordinates.width;
+        int h = coordinates.height;
+        label.setBounds(x, y, w, h);
+    }
     
     /**
      * Change the image inside a label to a new image an possibly resize the 
@@ -122,6 +167,43 @@ public class GameImage
         label.setOpaque(false);                 // remove background color
         icon = new ImageIcon(getClass().getResource(imageFile));    // set icon
         label.setIcon(icon);                    // set icon to label
+        show();                                 // display picturebox 
+        resizeToContainer();                    // resize
+    }
+    
+    /**
+     * Change the image inside a label to a new image from a sprite sheet and 
+     * possibly resize the image to fit the label size
+     * 
+     * @param spriteSheet imageFile the new image file to change the label to
+     * @param x the x coordinate of the sprite sheet frame location
+     * @param y the y coordinate of the sprite sheet frame location
+     * @param width the width of the sprite sheet frame
+     * @param height the height coordinate of the sprite sheet frame  
+     */
+    public void setImage(
+            String spriteSheet, 
+            int x, 
+            int y, 
+            int width, 
+            int height) {
+        this.imageFile = spriteSheet;             // set property to parameter
+        try {
+            URL           url      = getClass().getResource(spriteSheet); // URL
+            URI           uri      = url.toURI();           // convert to URI
+            File          file     = new File(uri);         // create file
+            BufferedImage bigImage = ImageIO.read(file);            
+            BufferedImage subImage = bigImage.getSubimage(x, y, width, height);
+            label.setBorder(null);              // remove border
+            label.setOpaque(false);             // remove background color
+            label.setText("");
+            icon = new ImageIcon(subImage);     // set icon
+            label.setIcon(icon);                // set icon to label            
+        } catch (IOException ex) {
+            System.out.println("File read error: " + ex.toString());
+        } catch (URISyntaxException ex) {        
+            System.out.println("File convert error: " + ex.toString());
+        }
         show();                                 // display picturebox 
         resizeToContainer();                    // resize
     }
@@ -172,5 +254,30 @@ public class GameImage
         b = 255 - b;                    // calculate opposite blue value
         return new Color(r,g,b);        // return new color
     }
+
+    /** Sets the game image to be an "invisible" but active game object */
+    public void setClear() {
+        removeBorder();                 // remove any border
+        label.setIcon(null);            // remove any icon
+        label.setOpaque(false);         // no background color
+        label.setBackground(null);      // no background color
+        label.setForeground(null);      // no foreground 
+        label.setText("");              // no text
+    }
+
+    /** removes any border for the label */
+    public void removeBorder() {
+        label.setBorder(null);          // remove any border
+    }
+
+    /**
+     * Sets the label image used on a user interface 
+     * 
+     * @param label the label image used on a user interface
+     */
+    public void setLabel(JLabel label) {
+        this.label = label;
+    }
+    
     
 }

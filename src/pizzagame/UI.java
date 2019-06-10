@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pizzagame;
-
-import Tools.Animation;
+import Tools.FileHandler;
+import Tools.GameImage;
+import Tools.MediaPlayer;
 import collections.LinkedList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,34 +17,38 @@ import static pizzagame.PizzaOrder.toppingTypes;
  */
 public class UI extends javax.swing.JFrame {
     public  LinkedList<String> order;
-    public  LinkedList<String> orderVIP;
     public  LinkedList<String> userList = new LinkedList<>();
     private int time = 25;
     private int money = 10;
     public int served = 0;
     private int lives = 3;
-    private int vipCount = 1;
     private Customer customer = new Customer();
-    private VIP vip = new VIP();
     private Timer timer;
+    private FileHandler file;
+    private MediaPlayer mediaPlayer = new MediaPlayer();
+    private GameImage image;
+    
     /**
-     * Modified constructor of the class sets game properties
-     * @param order
-     * @param orderVIP 
+     * Deafult constructor of the class sets class properties
      */
    public UI() {
        initComponents();
-       this.setSize(2000, 2000);
-       this.setVisible(true);
+       file = new FileHandler("/pizzagame/data.txt");
+       String[] data = file.read();
+       if (data != null){
+           String text ="Last High Score was: "+ "\n" + "Money Earned = " + data[0] + "\n" + 
+                        "Customers Served = " + data[1];
+           JOptionPane.showMessageDialog(this, text);
+       }
        name();
        backgroundCheck();
        timer.start();
        order = customer.order(doughTypes, cheeseTypes, sauceTypes, toppingTypes);
-       orderVIP = vip.order(doughTypes, cheeseTypes, sauceTypes, toppingTypes);
        lblOrder.setText(order.toString(order));
+       image = new GameImage(lblPic);
+       this.setSize(2000, 2000);
+       this.setVisible(true);
    }
-   
-   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -106,9 +106,9 @@ public class UI extends javax.swing.JFrame {
 
         lblOrder.setText("order");
         getContentPane().add(lblOrder);
-        lblOrder.setBounds(30, 200, 540, 100);
+        lblOrder.setBounds(30, 240, 540, 50);
         getContentPane().add(lblPic);
-        lblPic.setBounds(20, 30, 330, 160);
+        lblPic.setBounds(20, 30, 290, 230);
 
         btnDough1.setText("Full Grain");
         btnDough1.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +162,7 @@ public class UI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSauce1);
-        btnSauce1.setBounds(240, 340, 90, 23);
+        btnSauce1.setBounds(240, 340, 100, 23);
 
         btnSauce2.setText("Home-Made");
         btnSauce2.addActionListener(new java.awt.event.ActionListener() {
@@ -171,7 +171,7 @@ public class UI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSauce2);
-        btnSauce2.setBounds(240, 380, 90, 23);
+        btnSauce2.setBounds(240, 380, 100, 23);
 
         btnSauce3.setText("American");
         btnSauce3.addActionListener(new java.awt.event.ActionListener() {
@@ -180,7 +180,7 @@ public class UI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSauce3);
-        btnSauce3.setBounds(240, 420, 90, 23);
+        btnSauce3.setBounds(240, 420, 100, 23);
 
         btnSauce4.setText("Spicy");
         btnSauce4.addActionListener(new java.awt.event.ActionListener() {
@@ -189,7 +189,7 @@ public class UI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSauce4);
-        btnSauce4.setBounds(240, 460, 90, 23);
+        btnSauce4.setBounds(240, 460, 100, 23);
 
         btnSauce5.setText("Lousisiana");
         btnSauce5.addActionListener(new java.awt.event.ActionListener() {
@@ -198,7 +198,7 @@ public class UI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSauce5);
-        btnSauce5.setBounds(240, 500, 90, 23);
+        btnSauce5.setBounds(240, 500, 100, 23);
 
         btnCheese1.setText("Mozzarela");
         btnCheese1.addActionListener(new java.awt.event.ActionListener() {
@@ -207,7 +207,7 @@ public class UI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnCheese1);
-        btnCheese1.setBounds(360, 340, 90, 23);
+        btnCheese1.setBounds(360, 340, 100, 23);
 
         btnCheese2.setText("Swiss");
         btnCheese2.addActionListener(new java.awt.event.ActionListener() {
@@ -216,7 +216,7 @@ public class UI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnCheese2);
-        btnCheese2.setBounds(360, 380, 90, 23);
+        btnCheese2.setBounds(360, 380, 100, 23);
 
         btnCheese3.setText("Old-Fort");
         btnCheese3.addActionListener(new java.awt.event.ActionListener() {
@@ -225,7 +225,7 @@ public class UI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnCheese3);
-        btnCheese3.setBounds(360, 420, 90, 23);
+        btnCheese3.setBounds(360, 420, 100, 23);
 
         btnCheese4.setText("Cheedar");
         btnCheese4.addActionListener(new java.awt.event.ActionListener() {
@@ -234,7 +234,7 @@ public class UI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnCheese4);
-        btnCheese4.setBounds(360, 460, 90, 23);
+        btnCheese4.setBounds(360, 460, 100, 23);
 
         btnCheese5.setText("Provolone");
         btnCheese5.addActionListener(new java.awt.event.ActionListener() {
@@ -243,7 +243,7 @@ public class UI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnCheese5);
-        btnCheese5.setBounds(360, 500, 90, 23);
+        btnCheese5.setBounds(360, 500, 100, 23);
 
         btnTop1.setText("Peperoni");
         btnTop1.addActionListener(new java.awt.event.ActionListener() {
@@ -252,7 +252,7 @@ public class UI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnTop1);
-        btnTop1.setBounds(480, 340, 90, 23);
+        btnTop1.setBounds(480, 340, 100, 23);
 
         btnTop2.setText("Ham");
         btnTop2.addActionListener(new java.awt.event.ActionListener() {
@@ -261,7 +261,7 @@ public class UI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnTop2);
-        btnTop2.setBounds(480, 380, 90, 23);
+        btnTop2.setBounds(480, 380, 100, 23);
 
         btnTop3.setText("Salami");
         btnTop3.addActionListener(new java.awt.event.ActionListener() {
@@ -270,7 +270,7 @@ public class UI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnTop3);
-        btnTop3.setBounds(480, 420, 90, 23);
+        btnTop3.setBounds(480, 420, 100, 23);
 
         btnTop4.setText("Pineapple");
         btnTop4.addActionListener(new java.awt.event.ActionListener() {
@@ -279,7 +279,7 @@ public class UI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnTop4);
-        btnTop4.setBounds(480, 460, 90, 23);
+        btnTop4.setBounds(480, 460, 100, 23);
 
         btnTop5.setText("Mushrooms");
         btnTop5.addActionListener(new java.awt.event.ActionListener() {
@@ -288,7 +288,7 @@ public class UI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnTop5);
-        btnTop5.setBounds(480, 500, 90, 23);
+        btnTop5.setBounds(480, 500, 100, 23);
 
         jLabel3.setText("Toppings");
         getContentPane().add(jLabel3);
@@ -347,7 +347,7 @@ public class UI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSauce6);
-        btnSauce6.setBounds(240, 540, 90, 23);
+        btnSauce6.setBounds(240, 540, 100, 23);
 
         btnCheese6.setText("Parmigan");
         btnCheese6.addActionListener(new java.awt.event.ActionListener() {
@@ -356,7 +356,7 @@ public class UI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnCheese6);
-        btnCheese6.setBounds(360, 540, 90, 23);
+        btnCheese6.setBounds(360, 540, 100, 23);
 
         btnTop6.setText("Peppers");
         btnTop6.addActionListener(new java.awt.event.ActionListener() {
@@ -365,7 +365,7 @@ public class UI extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnTop6);
-        btnTop6.setBounds(480, 540, 90, 23);
+        btnTop6.setBounds(480, 540, 100, 23);
 
         btnDone.setText("Finish Order");
         btnDone.addActionListener(new java.awt.event.ActionListener() {
@@ -380,15 +380,15 @@ public class UI extends javax.swing.JFrame {
         getContentPane().add(lblDisMoney);
         lblDisMoney.setBounds(640, 110, 80, 30);
 
-        lblHeart3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pizzagame/heart.png"))); // NOI18N
+        lblHeart3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/media/heart.png"))); // NOI18N
         getContentPane().add(lblHeart3);
         lblHeart3.setBounds(780, 210, 70, 70);
 
-        lblHeart1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pizzagame/heart.png"))); // NOI18N
+        lblHeart1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/media/heart.png"))); // NOI18N
         getContentPane().add(lblHeart1);
         lblHeart1.setBounds(780, 30, 70, 70);
 
-        lblHeart2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pizzagame/heart.png"))); // NOI18N
+        lblHeart2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/media/heart.png"))); // NOI18N
         getContentPane().add(lblHeart2);
         lblHeart2.setBounds(780, 120, 70, 70);
 
@@ -397,89 +397,113 @@ public class UI extends javax.swing.JFrame {
 
     private void btnDough1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDough1ActionPerformed
        userList.add(doughTypes.get(0));
+       image.setImage("/media/PizzaDough.png");
+       mediaPlayer.playWAV("/media/music.wav"); //change
+       
     }//GEN-LAST:event_btnDough1ActionPerformed
 
     private void btnCheese3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheese3ActionPerformed
         userList.add(cheeseTypes.get(2));
+         image.setImage("/media/PizzaCheese.png");
     }//GEN-LAST:event_btnCheese3ActionPerformed
 
     private void btnTop4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTop4ActionPerformed
         userList.add(toppingTypes.get(3));
+         image.setImage("/media/PizzaDough.png"); //change
     }//GEN-LAST:event_btnTop4ActionPerformed
 
     private void btnTop5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTop5ActionPerformed
         userList.add(toppingTypes.get(4));
+         image.setImage("/media/PizzaDough.png"); //change
     }//GEN-LAST:event_btnTop5ActionPerformed
 
     private void btnTop6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTop6ActionPerformed
         userList.add(toppingTypes.get(5));
+        image.setImage("/media/PizzaDough.png"); //change
     }//GEN-LAST:event_btnTop6ActionPerformed
 
     private void btnSauce6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSauce6ActionPerformed
         userList.add(sauceTypes.get(5));
+         image.setImage("/media/PizzaSauce.png");
     }//GEN-LAST:event_btnSauce6ActionPerformed
 
     private void btnDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoneActionPerformed
         checkOrder(order,userList); // only works with customer rn
+      
     }//GEN-LAST:event_btnDoneActionPerformed
 
     private void btnDough2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDough2ActionPerformed
         userList.add(doughTypes.get(1));
+        image.setImage("/media/PizzaDough.png");
     }//GEN-LAST:event_btnDough2ActionPerformed
 
     private void btnDough3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDough3ActionPerformed
         userList.add(doughTypes.get(2));
+        image.setImage("/media/PizzaDough.png");
     }//GEN-LAST:event_btnDough3ActionPerformed
 
     private void btnDough4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDough4ActionPerformed
         userList.add(doughTypes.get(3));
+        image.setImage("/media/PizzaDough.png");
     }//GEN-LAST:event_btnDough4ActionPerformed
 
     private void btnDough5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDough5ActionPerformed
         userList.add(doughTypes.get(4));
+        image.setImage("/media/PizzaDough.png");
     }//GEN-LAST:event_btnDough5ActionPerformed
 
     private void btnDough6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDough6ActionPerformed
         userList.add(doughTypes.get(5));
+        image.setImage("/media/PizzaDough.png");
     }//GEN-LAST:event_btnDough6ActionPerformed
 
     private void btnSauce1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSauce1ActionPerformed
         userList.add(sauceTypes.get(0));
+        image.setImage("/media/PizzaSauce.png");
     }//GEN-LAST:event_btnSauce1ActionPerformed
 
     private void btnSauce2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSauce2ActionPerformed
         userList.add(sauceTypes.get(1));
+          image.setImage("/media/PizzaSauce.png");
     }//GEN-LAST:event_btnSauce2ActionPerformed
 
     private void btnSauce3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSauce3ActionPerformed
         userList.add(sauceTypes.get(2));
+          image.setImage("/media/PizzaSauce.png");
     }//GEN-LAST:event_btnSauce3ActionPerformed
 
     private void btnSauce4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSauce4ActionPerformed
         userList.add(sauceTypes.get(3));
+          image.setImage("/media/PizzaSauce.png");
     }//GEN-LAST:event_btnSauce4ActionPerformed
 
     private void btnSauce5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSauce5ActionPerformed
         userList.add(sauceTypes.get(4));
+          image.setImage("/media/PizzaSauce.png");
     }//GEN-LAST:event_btnSauce5ActionPerformed
 
     private void btnCheese1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheese1ActionPerformed
+        image.setImage("/media/PizzaCheese.png");
         userList.add(cheeseTypes.get(0));
     }//GEN-LAST:event_btnCheese1ActionPerformed
 
     private void btnCheese2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheese2ActionPerformed
+       image.setImage("/media/PizzaCheese.png");
         userList.add(cheeseTypes.get(1));
     }//GEN-LAST:event_btnCheese2ActionPerformed
 
     private void btnCheese4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheese4ActionPerformed
+       image.setImage("/media/PizzaCheese.png");
         userList.add(cheeseTypes.get(3));
     }//GEN-LAST:event_btnCheese4ActionPerformed
 
     private void btnCheese5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheese5ActionPerformed
+      image.setImage("/media/PizzaCheese.png");
         userList.add(cheeseTypes.get(4));
     }//GEN-LAST:event_btnCheese5ActionPerformed
 
     private void btnCheese6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheese6ActionPerformed
+        image.setImage("/media/PizzaCheese.png");
         userList.add(cheeseTypes.get(5));
     }//GEN-LAST:event_btnCheese6ActionPerformed
 
@@ -553,16 +577,15 @@ public class UI extends javax.swing.JFrame {
                    time = 25;
                    money--;
                    lives--;
-            }
-            if (lives == 0){
-                JOptionPane.showMessageDialog(null, "Game Over" + "\n" + 
-                        "You have served " + served + " Customers and got " + money + "$");
-                System.exit(0);
+                   redrawHearts();
             }
             } 
         });
     }
-    
+     private void displayStats() {
+                JOptionPane.showMessageDialog(null, "Game Over" + "\n" + 
+                        "You have served " + served + " Customers and got " + money + "$");
+            }
     private void name() {
       String text = "Welcome to Papa's pizzeria recruit, what shall we call you?"; 
       String name = JOptionPane.showInputDialog(null,text);
@@ -573,7 +596,7 @@ public class UI extends javax.swing.JFrame {
     }
 
     private void checkOrder(LinkedList<String> order, LinkedList<String> userList) {
-        if (userList.equals(order)){
+         if (userList.equals(order)){
            order.finalize();
            userList.finalize();
             String cash = Integer.toString(money);
@@ -583,7 +606,7 @@ public class UI extends javax.swing.JFrame {
             served++;
             lblDisMoney.setText(cash);
             time = 26;
-            spawnCustomer(customer, vip);    
+            spawnCustomer();    
         }
         else {
            String cash = Integer.toString(money);
@@ -593,31 +616,30 @@ public class UI extends javax.swing.JFrame {
             lblResponse.setText("Beh, and you call this place a 'Pizzeria'");
             lives--;
             money--;
-            checkHearts();
+            redrawHearts();
             lblDisMoney.setText(cash);
             time = 26;
-            spawnCustomer(customer, vip);
+            spawnCustomer();
         }
     }
     
-    private void checkHearts(){
+    private void redrawHearts(){
         if (lives == 2) lblHeart3.setVisible(false);
         if (lives == 1) lblHeart2.setVisible(false);
-        if (lives == 0) lblHeart1.setVisible(false);
+        if (lives == 0){ 
+            lblHeart1.setVisible(false);
+            String[] data = {
+              "" + money, "" + served  
+            };
+            file.write(data);
+            displayStats();
+            System.exit(0);
+        }
+        
     }
     
-  private void spawnCustomer(Customer customer, VIP vip){
-     if (vipCount == 0){
-         spawnVIP(vip);
-     }
+  private void spawnCustomer(){
      order = customer.order(doughTypes, cheeseTypes, sauceTypes, toppingTypes);
      lblOrder.setText(order.toString(order));
     }
-   
-  private void spawnVIP(VIP vip){
-        orderVIP = vip.order(doughTypes, cheeseTypes, sauceTypes, toppingTypes);
-        lblOrder.setText(orderVIP.toString(orderVIP));
-      
-    }
-    
 }

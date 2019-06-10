@@ -1,36 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pizzagame;
-
-
 import java.io.IOException;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author r.stuchevsky
  */
 public class Menu extends javax.swing.JFrame {
-
     /**
      * Creates new form Menu
      */
     public Menu() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        
         this.setVisible(true);
         initComponents();
-        this.setSize(2000, 2000);
-        
-      
-        
-       
+        this.setSize(720,720);
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,14 +34,14 @@ public class Menu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pizzagame/pizza.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/media/giphy.gif"))); // NOI18N
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(200, 190, 280, 190);
+        jLabel1.setBounds(160, 90, 380, 460);
 
         jLabel2.setFont(new java.awt.Font("Rockwell", 0, 48)); // NOI18N
         jLabel2.setText("Papa's Pizzeria");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(170, 70, 360, 132);
+        jLabel2.setBounds(180, -30, 360, 132);
 
         btnStart.setText("Start");
         btnStart.addActionListener(new java.awt.event.ActionListener() {
@@ -65,7 +50,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnStart);
-        btnStart.setBounds(120, 500, 110, 40);
+        btnStart.setBounds(120, 590, 110, 40);
 
         btnInfo.setText("Instructions");
         btnInfo.addActionListener(new java.awt.event.ActionListener() {
@@ -74,7 +59,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnInfo);
-        btnInfo.setBounds(270, 490, 110, 50);
+        btnInfo.setBounds(290, 590, 110, 40);
 
         btnExit.setText("Exit");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
@@ -83,7 +68,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnExit);
-        btnExit.setBounds(423, 490, 110, 50);
+        btnExit.setBounds(460, 590, 110, 40);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -93,7 +78,7 @@ public class Menu extends javax.swing.JFrame {
      */
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         this.setVisible(false);
-        Engine engine = new Engine(); 
+        UI ui = new UI();
     }//GEN-LAST:event_btnStartActionPerformed
     /**
      * Exits the game completly
@@ -107,7 +92,12 @@ public class Menu extends javax.swing.JFrame {
      * @param evt 
      */
     private void btnInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInfoActionPerformed
-       JOptionPane.showMessageDialog(null,"Welcome to the Papa's joint here is how to play...");
+       JOptionPane.showMessageDialog(null,"Welcome to the Papa's Pizzeria!" + "\n" + 
+               "The Game is simple, you have 25 seconds to build a customer order exactly to the T." + "\n" + 
+               "Click the buttons to add ingridients to your order, than 'finish order' to hand it to the customer." + 
+               "\n" + "If you ran out of time or your order was incorrect you lose a heart" + "\n" + 
+               "Once you lost all three of your hearts its game over."+ "\n" + "Your money and customer "
+               + "highscore will be saved for your next restart" + "\n" + "Good Luck and have fun!");
     }//GEN-LAST:event_btnInfoActionPerformed
 
    

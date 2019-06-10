@@ -23,6 +23,23 @@ public abstract class Person {
      public abstract void timeUntilAngry();
      public abstract LinkedList<String> order(LinkedList<String> doughTypes,
              LinkedList<String> cheeseTypes,LinkedList<String> sauceTypes,LinkedList<String> toppingTypes);
-     
+     /**
+     * generate random double
+     * @param low the lowest double in the range
+     * @param high the highest double in the range
+     * @return the generated number
+     */        
+    protected double random(double low, double high){
+        return (high - low + 1d) * Math.random() + low;
+    }
+    /**
+     * generates random integer
+     * @param low the lowest integer in the range
+     * @param high the highest integer in the range
+     * @return the generated number
+     */
+    protected int random(int low, int high){
+        return (int) (random((double)low, (double)high));
+    }
      
 }
