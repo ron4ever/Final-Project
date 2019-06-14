@@ -4,8 +4,8 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import pizzagame.Menu;
 /**
- * FinalProject.java - 
- * 
+ * FinalProject.java - The class containing main that starts up the whole game process
+ * @Instructor Mr.Wachs
  * @since 9-Apr-2019
  * @author r.stuchevsky
  */

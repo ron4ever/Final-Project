@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Tools;
 import java.io.File;
 import java.io.IOException;
@@ -16,19 +10,16 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 /**
- * MediaPlayer.java -
- * 
+ * MediaPlayer.java - Plays media from the media package
+ * @Instructor Mr.Wachs
  * @since 5-Jun-2019 
  * @author r.stuchevsky
  */
 public class MediaPlayer {
   private AudioInputStream audioStream;
   private Clip             clip;
-
-    
     /**
      * Plays the passed file object WAV file as audio
-     * 
      * @param file the File object (*.wav) to play
      * @return the status of what occurred when trying to play the file
      */
@@ -53,15 +44,12 @@ public class MediaPlayer {
             return "File error";
         } 
     }
-
     /** Stops any playing audio clip */
     public void stop() {
         if (clip != null) clip.stop();
     }
-
     /**
      * Plays the passed filename (relative class path *.wav file) as audio
-     * 
      * @param filename the relative class path to the file (*.wav) to play
      * @return 
      */
@@ -89,5 +77,4 @@ public class MediaPlayer {
             return "File URI error";
         }
     }      
-
 }

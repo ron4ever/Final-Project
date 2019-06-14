@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Tools;
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,35 +9,28 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 /**
- * FileHandler.java -
- * 
+ * FileHandler.java - Saves to a file
  * @since 5-Jun-2019 
+ * @Instructor Mr.Wachs
  * @author r.stuchevsky
  */
 public class FileHandler {
    private String filename;
-    
-    
     /**
      * Default constructor for the class, sets class properties
-     * 
      * @param filename the filename to associate the class with 
      */
     public FileHandler(String filename) {
         this.filename = filename;
     }
-
     /**
      * Reads the data from the file and returns all the lines as a string array
-     * 
      * @return a string array of all the lines from the file 
      */
     public String[] read() {
         try {                                                   // error trap
-            File           file   = convertToFile(filename);    // create file
-            
+            File  file   = convertToFile(filename);    // create file
 //            if (!file.exists()) file.createNewFile();
-            
             FileReader     reader = new FileReader(file);       // create reader
             BufferedReader buffer = new BufferedReader(reader); // create buffer
             String         line   = buffer.readLine();          // read a line
@@ -64,10 +51,8 @@ public class FileHandler {
         }
         return null;                                            // error caught
     }
-
     /**
      * Writes the passed data to the file
-     * 
      * @param data string array to write to the file
      */
     public void write(String[] data) {
@@ -88,11 +73,9 @@ public class FileHandler {
             System.out.println("Write Null error");
         }
     }
-    
     /**
      * Converts the file name string into a file object relative to the 
      * application package
-     * 
      * @return a file object converted from the file name string 
      */
     public File convertToFile(String filename) {
@@ -111,8 +94,4 @@ public class FileHandler {
         }
         return null;                                        // error caught
     }   
-
-    
-
-
 }

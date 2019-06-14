@@ -11,44 +11,49 @@ import static pizzagame.PizzaOrder.cheeseTypes;
 import static pizzagame.PizzaOrder.doughTypes;
 import static pizzagame.PizzaOrder.sauceTypes;
 import static pizzagame.PizzaOrder.toppingTypes;
+
 /**
- *
+ *UI and code for the pizza game that allows the user to play pizza game 
+ * @Instructor Mr.Wachs
+ * @since 10-May-2019 
  * @author r.stuchevsky
  */
 public class UI extends javax.swing.JFrame {
-    public  LinkedList<String> order;
-    public  LinkedList<String> userList = new LinkedList<>();
-    private int time = 25;
-    private int money = 10;
-    public int served = 0;
-    private int lives = 3;
+    //propeties of the class
+    public LinkedList<String> order; // the customer order
+    public LinkedList<String> userList = new LinkedList<>(); //the user order that will be filled
+    private int time = 25; // the starting amount of time
+    private int money = 3;  // the starting amount of money
+    public int served = 0; // number of served cutomers updates with each succesful serve
+    private int lives = 3;  //number of lives (if 3 are gone its game over)
     private Customer customer = new Customer();
     private Timer timer;
     private FileHandler file;
     private MediaPlayer mediaPlayer = new MediaPlayer();
     private GameImage image;
-    
     /**
      * Deafult constructor of the class sets class properties
      */
-   public UI() {
-       initComponents();
-       file = new FileHandler("/pizzagame/data.txt");
-       String[] data = file.read();
-       if (data != null){
-           String text ="Last High Score was: "+ "\n" + "Money Earned = " + data[0] + "\n" + 
-                        "Customers Served = " + data[1];
-           JOptionPane.showMessageDialog(this, text);
-       }
-       name();
-       backgroundCheck();
-       timer.start();
-       order = customer.order(doughTypes, cheeseTypes, sauceTypes, toppingTypes);
-       lblOrder.setText(order.toString(order));
-       image = new GameImage(lblPic);
-       this.setSize(2000, 2000);
-       this.setVisible(true);
-   }
+    public UI() {
+        initComponents();
+        file = new FileHandler("/pizzagame/data.txt");
+        String[] data = file.read();
+        if (data != null) {
+            String text = "Last High Score was: " + "\n" + "Money Earned = " + data[0] + "\n"
+                    + "Customers Served = " + data[1];
+            JOptionPane.showMessageDialog(this, text);
+        }
+        name();
+        backgroundCheck();
+        timer.start();
+        order = customer.order(doughTypes, sauceTypes, cheeseTypes, toppingTypes);
+        lblOrder.setText(order.toString(order));
+        lblServed.setText("Served: " + served);
+        image = new GameImage(lblPic);
+         mediaPlayer.playWAV("/media/BackgroundMusic.wav"); 
+        this.setSize(915, 700);
+        this.setVisible(true);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -60,26 +65,26 @@ public class UI extends javax.swing.JFrame {
 
         lblOrder = new javax.swing.JLabel();
         lblPic = new javax.swing.JLabel();
-        btnDough1 = new javax.swing.JButton();
-        btnDough2 = new javax.swing.JButton();
-        btnDough3 = new javax.swing.JButton();
-        btnDough4 = new javax.swing.JButton();
-        btnDough5 = new javax.swing.JButton();
-        btnSauce1 = new javax.swing.JButton();
-        btnSauce2 = new javax.swing.JButton();
-        btnSauce3 = new javax.swing.JButton();
-        btnSauce4 = new javax.swing.JButton();
-        btnSauce5 = new javax.swing.JButton();
-        btnCheese1 = new javax.swing.JButton();
-        btnCheese2 = new javax.swing.JButton();
-        btnCheese3 = new javax.swing.JButton();
-        btnCheese4 = new javax.swing.JButton();
-        btnCheese5 = new javax.swing.JButton();
-        btnTop1 = new javax.swing.JButton();
-        btnTop2 = new javax.swing.JButton();
-        btnTop3 = new javax.swing.JButton();
-        btnTop4 = new javax.swing.JButton();
-        btnTop5 = new javax.swing.JButton();
+        btnDoughFull = new javax.swing.JButton();
+        btnDoughThick = new javax.swing.JButton();
+        btnDoughThin = new javax.swing.JButton();
+        btnDoughSoft = new javax.swing.JButton();
+        btnDoughItalian = new javax.swing.JButton();
+        btnSauceItalian = new javax.swing.JButton();
+        btnSauceHomeMade = new javax.swing.JButton();
+        btnSauceAmerican = new javax.swing.JButton();
+        btnSauceSpicy = new javax.swing.JButton();
+        btnSauceLouisiana = new javax.swing.JButton();
+        btnCheeseMozz = new javax.swing.JButton();
+        btnCheeseSwiss = new javax.swing.JButton();
+        btnCheeseOld = new javax.swing.JButton();
+        btnCheeseCheddar = new javax.swing.JButton();
+        btnCheeseProvolone = new javax.swing.JButton();
+        btnTopPeperoni = new javax.swing.JButton();
+        btnTopHam = new javax.swing.JButton();
+        btnTopSalami = new javax.swing.JButton();
+        btnTopPineApple = new javax.swing.JButton();
+        btnTopMushroom = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -89,210 +94,212 @@ public class UI extends javax.swing.JFrame {
         txtName = new javax.swing.JLabel();
         lblTxt = new javax.swing.JLabel();
         lblMoney = new javax.swing.JLabel();
-        btnDough6 = new javax.swing.JButton();
-        btnSauce6 = new javax.swing.JButton();
-        btnCheese6 = new javax.swing.JButton();
-        btnTop6 = new javax.swing.JButton();
+        btnDoughCheese = new javax.swing.JButton();
+        btnSauceChipotle = new javax.swing.JButton();
+        btnCheeseParmesan = new javax.swing.JButton();
+        btnTopPepper = new javax.swing.JButton();
         btnDone = new javax.swing.JButton();
         lblDisMoney = new javax.swing.JLabel();
         lblHeart3 = new javax.swing.JLabel();
         lblHeart1 = new javax.swing.JLabel();
         lblHeart2 = new javax.swing.JLabel();
+        lblServed = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Papa Jhon's Pizzeria Tycoon");
         setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().setLayout(null);
 
+        lblOrder.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblOrder.setText("order");
         getContentPane().add(lblOrder);
-        lblOrder.setBounds(30, 240, 540, 50);
+        lblOrder.setBounds(20, 260, 860, 50);
         getContentPane().add(lblPic);
         lblPic.setBounds(20, 30, 290, 230);
 
-        btnDough1.setText("Full Grain");
-        btnDough1.addActionListener(new java.awt.event.ActionListener() {
+        btnDoughFull.setText("Full Grain");
+        btnDoughFull.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDough1ActionPerformed(evt);
+                btnDoughFullActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDough1);
-        btnDough1.setBounds(110, 340, 100, 23);
+        getContentPane().add(btnDoughFull);
+        btnDoughFull.setBounds(110, 340, 100, 23);
 
-        btnDough2.setText("Thick");
-        btnDough2.addActionListener(new java.awt.event.ActionListener() {
+        btnDoughThick.setText("Thick");
+        btnDoughThick.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDough2ActionPerformed(evt);
+                btnDoughThickActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDough2);
-        btnDough2.setBounds(110, 380, 100, 23);
+        getContentPane().add(btnDoughThick);
+        btnDoughThick.setBounds(110, 380, 100, 23);
 
-        btnDough3.setText("Thin");
-        btnDough3.addActionListener(new java.awt.event.ActionListener() {
+        btnDoughThin.setText("Thin");
+        btnDoughThin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDough3ActionPerformed(evt);
+                btnDoughThinActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDough3);
-        btnDough3.setBounds(110, 420, 100, 23);
+        getContentPane().add(btnDoughThin);
+        btnDoughThin.setBounds(110, 420, 100, 23);
 
-        btnDough4.setText("Soft");
-        btnDough4.addActionListener(new java.awt.event.ActionListener() {
+        btnDoughSoft.setText("Soft");
+        btnDoughSoft.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDough4ActionPerformed(evt);
+                btnDoughSoftActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDough4);
-        btnDough4.setBounds(110, 460, 100, 23);
+        getContentPane().add(btnDoughSoft);
+        btnDoughSoft.setBounds(110, 460, 100, 23);
 
-        btnDough5.setText("Italian");
-        btnDough5.addActionListener(new java.awt.event.ActionListener() {
+        btnDoughItalian.setText("Italian");
+        btnDoughItalian.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDough5ActionPerformed(evt);
+                btnDoughItalianActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDough5);
-        btnDough5.setBounds(110, 500, 100, 23);
+        getContentPane().add(btnDoughItalian);
+        btnDoughItalian.setBounds(110, 500, 100, 23);
 
-        btnSauce1.setText("Italian");
-        btnSauce1.addActionListener(new java.awt.event.ActionListener() {
+        btnSauceItalian.setText("Italian");
+        btnSauceItalian.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSauce1ActionPerformed(evt);
+                btnSauceItalianActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSauce1);
-        btnSauce1.setBounds(240, 340, 100, 23);
+        getContentPane().add(btnSauceItalian);
+        btnSauceItalian.setBounds(240, 340, 110, 23);
 
-        btnSauce2.setText("Home-Made");
-        btnSauce2.addActionListener(new java.awt.event.ActionListener() {
+        btnSauceHomeMade.setText("HomeMade");
+        btnSauceHomeMade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSauce2ActionPerformed(evt);
+                btnSauceHomeMadeActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSauce2);
-        btnSauce2.setBounds(240, 380, 100, 23);
+        getContentPane().add(btnSauceHomeMade);
+        btnSauceHomeMade.setBounds(240, 380, 110, 23);
 
-        btnSauce3.setText("American");
-        btnSauce3.addActionListener(new java.awt.event.ActionListener() {
+        btnSauceAmerican.setText("American");
+        btnSauceAmerican.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSauce3ActionPerformed(evt);
+                btnSauceAmericanActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSauce3);
-        btnSauce3.setBounds(240, 420, 100, 23);
+        getContentPane().add(btnSauceAmerican);
+        btnSauceAmerican.setBounds(240, 420, 110, 23);
 
-        btnSauce4.setText("Spicy");
-        btnSauce4.addActionListener(new java.awt.event.ActionListener() {
+        btnSauceSpicy.setText("Spicy");
+        btnSauceSpicy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSauce4ActionPerformed(evt);
+                btnSauceSpicyActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSauce4);
-        btnSauce4.setBounds(240, 460, 100, 23);
+        getContentPane().add(btnSauceSpicy);
+        btnSauceSpicy.setBounds(240, 460, 110, 23);
 
-        btnSauce5.setText("Lousisiana");
-        btnSauce5.addActionListener(new java.awt.event.ActionListener() {
+        btnSauceLouisiana.setText("Louisiana");
+        btnSauceLouisiana.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSauce5ActionPerformed(evt);
+                btnSauceLouisianaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSauce5);
-        btnSauce5.setBounds(240, 500, 100, 23);
+        getContentPane().add(btnSauceLouisiana);
+        btnSauceLouisiana.setBounds(240, 500, 110, 23);
 
-        btnCheese1.setText("Mozzarela");
-        btnCheese1.addActionListener(new java.awt.event.ActionListener() {
+        btnCheeseMozz.setText("Mozzarella");
+        btnCheeseMozz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCheese1ActionPerformed(evt);
+                btnCheeseMozzActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCheese1);
-        btnCheese1.setBounds(360, 340, 100, 23);
+        getContentPane().add(btnCheeseMozz);
+        btnCheeseMozz.setBounds(370, 340, 100, 23);
 
-        btnCheese2.setText("Swiss");
-        btnCheese2.addActionListener(new java.awt.event.ActionListener() {
+        btnCheeseSwiss.setText("Swiss");
+        btnCheeseSwiss.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCheese2ActionPerformed(evt);
+                btnCheeseSwissActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCheese2);
-        btnCheese2.setBounds(360, 380, 100, 23);
+        getContentPane().add(btnCheeseSwiss);
+        btnCheeseSwiss.setBounds(370, 380, 100, 23);
 
-        btnCheese3.setText("Old-Fort");
-        btnCheese3.addActionListener(new java.awt.event.ActionListener() {
+        btnCheeseOld.setText("OldFort");
+        btnCheeseOld.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCheese3ActionPerformed(evt);
+                btnCheeseOldActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCheese3);
-        btnCheese3.setBounds(360, 420, 100, 23);
+        getContentPane().add(btnCheeseOld);
+        btnCheeseOld.setBounds(370, 420, 100, 23);
 
-        btnCheese4.setText("Cheedar");
-        btnCheese4.addActionListener(new java.awt.event.ActionListener() {
+        btnCheeseCheddar.setText("Cheddar");
+        btnCheeseCheddar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCheese4ActionPerformed(evt);
+                btnCheeseCheddarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCheese4);
-        btnCheese4.setBounds(360, 460, 100, 23);
+        getContentPane().add(btnCheeseCheddar);
+        btnCheeseCheddar.setBounds(370, 460, 100, 23);
 
-        btnCheese5.setText("Provolone");
-        btnCheese5.addActionListener(new java.awt.event.ActionListener() {
+        btnCheeseProvolone.setText("Provolone");
+        btnCheeseProvolone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCheese5ActionPerformed(evt);
+                btnCheeseProvoloneActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCheese5);
-        btnCheese5.setBounds(360, 500, 100, 23);
+        getContentPane().add(btnCheeseProvolone);
+        btnCheeseProvolone.setBounds(370, 500, 100, 23);
 
-        btnTop1.setText("Peperoni");
-        btnTop1.addActionListener(new java.awt.event.ActionListener() {
+        btnTopPeperoni.setText("Peperoni");
+        btnTopPeperoni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTop1ActionPerformed(evt);
+                btnTopPeperoniActionPerformed(evt);
             }
         });
-        getContentPane().add(btnTop1);
-        btnTop1.setBounds(480, 340, 100, 23);
+        getContentPane().add(btnTopPeperoni);
+        btnTopPeperoni.setBounds(500, 340, 110, 23);
 
-        btnTop2.setText("Ham");
-        btnTop2.addActionListener(new java.awt.event.ActionListener() {
+        btnTopHam.setText("Ham");
+        btnTopHam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTop2ActionPerformed(evt);
+                btnTopHamActionPerformed(evt);
             }
         });
-        getContentPane().add(btnTop2);
-        btnTop2.setBounds(480, 380, 100, 23);
+        getContentPane().add(btnTopHam);
+        btnTopHam.setBounds(500, 380, 110, 23);
 
-        btnTop3.setText("Salami");
-        btnTop3.addActionListener(new java.awt.event.ActionListener() {
+        btnTopSalami.setText("Salami");
+        btnTopSalami.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTop3ActionPerformed(evt);
+                btnTopSalamiActionPerformed(evt);
             }
         });
-        getContentPane().add(btnTop3);
-        btnTop3.setBounds(480, 420, 100, 23);
+        getContentPane().add(btnTopSalami);
+        btnTopSalami.setBounds(500, 420, 110, 23);
 
-        btnTop4.setText("Pineapple");
-        btnTop4.addActionListener(new java.awt.event.ActionListener() {
+        btnTopPineApple.setText("Pineapple");
+        btnTopPineApple.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTop4ActionPerformed(evt);
+                btnTopPineAppleActionPerformed(evt);
             }
         });
-        getContentPane().add(btnTop4);
-        btnTop4.setBounds(480, 460, 100, 23);
+        getContentPane().add(btnTopPineApple);
+        btnTopPineApple.setBounds(500, 460, 110, 23);
 
-        btnTop5.setText("Mushrooms");
-        btnTop5.addActionListener(new java.awt.event.ActionListener() {
+        btnTopMushroom.setText("Mushrooms");
+        btnTopMushroom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTop5ActionPerformed(evt);
+                btnTopMushroomActionPerformed(evt);
             }
         });
-        getContentPane().add(btnTop5);
-        btnTop5.setBounds(480, 500, 100, 23);
+        getContentPane().add(btnTopMushroom);
+        btnTopMushroom.setBounds(500, 500, 110, 23);
 
         jLabel3.setText("Toppings");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(480, 320, 70, 20);
+        jLabel3.setBounds(500, 320, 70, 20);
 
         jLabel4.setText("Doughs");
         getContentPane().add(jLabel4);
@@ -304,11 +311,12 @@ public class UI extends javax.swing.JFrame {
 
         jLabel6.setText("Cheeses");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(360, 320, 70, 20);
+        jLabel6.setBounds(370, 320, 70, 20);
 
+        lblResponse.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblResponse.setText("Response of customer");
         getContentPane().add(lblResponse);
-        lblResponse.setBounds(30, 600, 570, 90);
+        lblResponse.setBounds(30, 590, 570, 90);
 
         lblTimer.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblTimer.setText("25");
@@ -319,7 +327,7 @@ public class UI extends javax.swing.JFrame {
         txtName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtName.setText("PlayerName");
         getContentPane().add(txtName);
-        txtName.setBounds(540, 50, 110, 50);
+        txtName.setBounds(570, 50, 110, 50);
 
         lblTxt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblTxt.setText("Time Left:");
@@ -329,43 +337,43 @@ public class UI extends javax.swing.JFrame {
         lblMoney.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblMoney.setText("Money");
         getContentPane().add(lblMoney);
-        lblMoney.setBounds(550, 110, 90, 30);
+        lblMoney.setBounds(570, 100, 90, 30);
 
-        btnDough6.setText("Cheese Fill");
-        btnDough6.addActionListener(new java.awt.event.ActionListener() {
+        btnDoughCheese.setText("Cheese Fill");
+        btnDoughCheese.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDough6ActionPerformed(evt);
+                btnDoughCheeseActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDough6);
-        btnDough6.setBounds(110, 540, 100, 23);
+        getContentPane().add(btnDoughCheese);
+        btnDoughCheese.setBounds(110, 540, 100, 23);
 
-        btnSauce6.setText("Chipotle");
-        btnSauce6.addActionListener(new java.awt.event.ActionListener() {
+        btnSauceChipotle.setText("Chipotle");
+        btnSauceChipotle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSauce6ActionPerformed(evt);
+                btnSauceChipotleActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSauce6);
-        btnSauce6.setBounds(240, 540, 100, 23);
+        getContentPane().add(btnSauceChipotle);
+        btnSauceChipotle.setBounds(240, 540, 110, 23);
 
-        btnCheese6.setText("Parmigan");
-        btnCheese6.addActionListener(new java.awt.event.ActionListener() {
+        btnCheeseParmesan.setText("Parmesan");
+        btnCheeseParmesan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCheese6ActionPerformed(evt);
+                btnCheeseParmesanActionPerformed(evt);
             }
         });
-        getContentPane().add(btnCheese6);
-        btnCheese6.setBounds(360, 540, 100, 23);
+        getContentPane().add(btnCheeseParmesan);
+        btnCheeseParmesan.setBounds(370, 540, 100, 23);
 
-        btnTop6.setText("Peppers");
-        btnTop6.addActionListener(new java.awt.event.ActionListener() {
+        btnTopPepper.setText("Peppers");
+        btnTopPepper.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTop6ActionPerformed(evt);
+                btnTopPepperActionPerformed(evt);
             }
         });
-        getContentPane().add(btnTop6);
-        btnTop6.setBounds(480, 540, 100, 23);
+        getContentPane().add(btnTopPepper);
+        btnTopPepper.setBounds(500, 540, 110, 23);
 
         btnDone.setText("Finish Order");
         btnDone.addActionListener(new java.awt.event.ActionListener() {
@@ -378,175 +386,279 @@ public class UI extends javax.swing.JFrame {
 
         lblDisMoney.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         getContentPane().add(lblDisMoney);
-        lblDisMoney.setBounds(640, 110, 80, 30);
+        lblDisMoney.setBounds(640, 100, 80, 30);
 
         lblHeart3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/media/heart.png"))); // NOI18N
         getContentPane().add(lblHeart3);
-        lblHeart3.setBounds(780, 210, 70, 70);
+        lblHeart3.setBounds(800, 190, 70, 70);
 
         lblHeart1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/media/heart.png"))); // NOI18N
         getContentPane().add(lblHeart1);
-        lblHeart1.setBounds(780, 30, 70, 70);
+        lblHeart1.setBounds(800, 10, 70, 70);
 
         lblHeart2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/media/heart.png"))); // NOI18N
         getContentPane().add(lblHeart2);
-        lblHeart2.setBounds(780, 120, 70, 70);
+        lblHeart2.setBounds(800, 100, 70, 70);
+
+        lblServed.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblServed.setText("Served: 0");
+        getContentPane().add(lblServed);
+        lblServed.setBounds(570, 140, 90, 30);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnDough1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDough1ActionPerformed
-       userList.add(doughTypes.get(0));
-       image.setImage("/media/PizzaDough.png");
-       mediaPlayer.playWAV("/media/music.wav"); //change
-       
-    }//GEN-LAST:event_btnDough1ActionPerformed
-
-    private void btnCheese3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheese3ActionPerformed
-        userList.add(cheeseTypes.get(2));
-         image.setImage("/media/PizzaCheese.png");
-    }//GEN-LAST:event_btnCheese3ActionPerformed
-
-    private void btnTop4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTop4ActionPerformed
-        userList.add(toppingTypes.get(3));
-         image.setImage("/media/PizzaDough.png"); //change
-    }//GEN-LAST:event_btnTop4ActionPerformed
-
-    private void btnTop5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTop5ActionPerformed
-        userList.add(toppingTypes.get(4));
-         image.setImage("/media/PizzaDough.png"); //change
-    }//GEN-LAST:event_btnTop5ActionPerformed
-
-    private void btnTop6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTop6ActionPerformed
-        userList.add(toppingTypes.get(5));
-        image.setImage("/media/PizzaDough.png"); //change
-    }//GEN-LAST:event_btnTop6ActionPerformed
-
-    private void btnSauce6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSauce6ActionPerformed
-        userList.add(sauceTypes.get(5));
-         image.setImage("/media/PizzaSauce.png");
-    }//GEN-LAST:event_btnSauce6ActionPerformed
-
-    private void btnDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoneActionPerformed
-        checkOrder(order,userList); // only works with customer rn
-      
-    }//GEN-LAST:event_btnDoneActionPerformed
-
-    private void btnDough2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDough2ActionPerformed
-        userList.add(doughTypes.get(1));
+    /**
+     * Adds pizza ingredients to the User Linked List
+     * @param evt 
+     */
+    private void btnDoughFullActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoughFullActionPerformed
+        mediaPlayer.playWAV("/media/ButtonSound.wav"); 
+        userList.add(doughTypes.get(0));
         image.setImage("/media/PizzaDough.png");
-    }//GEN-LAST:event_btnDough2ActionPerformed
-
-    private void btnDough3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDough3ActionPerformed
+    }//GEN-LAST:event_btnDoughFullActionPerformed
+    /**
+     * Adds pizza ingredients to the User Linked List
+     * @param evt 
+     */
+    private void btnCheeseOldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheeseOldActionPerformed
+        mediaPlayer.playWAV("/media/ButtonSound.wav"); 
+        userList.add(cheeseTypes.get(2));
+        image.setImage("/media/PizzaCheese.png");
+    }//GEN-LAST:event_btnCheeseOldActionPerformed
+    /**
+     * Adds pizza ingredients to the User Linked List
+     * @param evt 
+     */
+    private void btnTopPineAppleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTopPineAppleActionPerformed
+        mediaPlayer.playWAV("/media/ButtonSound.wav"); 
+        userList.add(toppingTypes.get(3));
+        image.setImage("/media/PizzaPineApple.png");  
+    }//GEN-LAST:event_btnTopPineAppleActionPerformed
+    /**
+     * Adds pizza ingredients to the User Linked List
+     * @param evt 
+     */
+    private void btnTopMushroomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTopMushroomActionPerformed
+        mediaPlayer.playWAV("/media/ButtonSound.wav"); 
+        userList.add(toppingTypes.get(4));
+        image.setImage("/media/PizzaMushroom.png");  
+    }//GEN-LAST:event_btnTopMushroomActionPerformed
+    /**
+     * Adds pizza ingredients to the User Linked List
+     * @param evt 
+     */
+    private void btnTopPepperActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTopPepperActionPerformed
+        mediaPlayer.playWAV("/media/ButtonSound.wav"); 
+        userList.add(toppingTypes.get(5));
+        image.setImage("/media/PizzaPeppers.png"); 
+    }//GEN-LAST:event_btnTopPepperActionPerformed
+    /**
+     * Adds pizza ingredients to the User Linked List
+     * @param evt 
+     */
+    private void btnSauceChipotleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSauceChipotleActionPerformed
+        mediaPlayer.playWAV("/media/ButtonSound.wav"); 
+        userList.add(sauceTypes.get(5));
+        image.setImage("/media/PizzaSauce.png"); 
+    }//GEN-LAST:event_btnSauceChipotleActionPerformed
+    /**
+     * Adds pizza ingredients to the User Linked List
+     * @param evt 
+     */
+    private void btnDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoneActionPerformed
+         mediaPlayer.playWAV("/media/ButtonSound.wav"); 
+        checkOrder(order, userList);
+         image.setClear();
+    }//GEN-LAST:event_btnDoneActionPerformed
+     /**
+     * Adds pizza ingredients to the User Linked List
+     * @param evt 
+     */
+    private void btnDoughThickActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoughThickActionPerformed
+        mediaPlayer.playWAV("/media/ButtonSound.wav"); 
+        userList.add(doughTypes.get(1));
+        image.setImage("/media/PizzaDough.png");  
+    }//GEN-LAST:event_btnDoughThickActionPerformed
+    /**
+     * Adds pizza ingredients to the User Linked List
+     * @param evt 
+     */
+    private void btnDoughThinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoughThinActionPerformed
+        mediaPlayer.playWAV("/media/ButtonSound.wav"); 
         userList.add(doughTypes.get(2));
         image.setImage("/media/PizzaDough.png");
-    }//GEN-LAST:event_btnDough3ActionPerformed
-
-    private void btnDough4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDough4ActionPerformed
+    }//GEN-LAST:event_btnDoughThinActionPerformed
+    /**
+     * Adds pizza ingredients to the User Linked List
+     * @param evt 
+     */
+    private void btnDoughSoftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoughSoftActionPerformed
+       mediaPlayer.playWAV("/media/ButtonSound.wav"); 
         userList.add(doughTypes.get(3));
         image.setImage("/media/PizzaDough.png");
-    }//GEN-LAST:event_btnDough4ActionPerformed
-
-    private void btnDough5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDough5ActionPerformed
+    }//GEN-LAST:event_btnDoughSoftActionPerformed
+    /**
+     * Adds pizza ingredients to the User Linked List
+     * @param evt 
+     */
+    private void btnDoughItalianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoughItalianActionPerformed
+        mediaPlayer.playWAV("/media/ButtonSound.wav"); 
         userList.add(doughTypes.get(4));
         image.setImage("/media/PizzaDough.png");
-    }//GEN-LAST:event_btnDough5ActionPerformed
-
-    private void btnDough6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDough6ActionPerformed
+    }//GEN-LAST:event_btnDoughItalianActionPerformed
+    /**
+     * Adds pizza ingredients to the User Linked List
+     * @param evt 
+     */
+    private void btnDoughCheeseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoughCheeseActionPerformed
+        mediaPlayer.playWAV("/media/ButtonSound.wav"); 
         userList.add(doughTypes.get(5));
         image.setImage("/media/PizzaDough.png");
-    }//GEN-LAST:event_btnDough6ActionPerformed
-
-    private void btnSauce1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSauce1ActionPerformed
+    }//GEN-LAST:event_btnDoughCheeseActionPerformed
+    /**
+     * Adds pizza ingredients to the User Linked List
+     * @param evt 
+     */
+    private void btnSauceItalianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSauceItalianActionPerformed
+        mediaPlayer.playWAV("/media/ButtonSound.wav"); 
         userList.add(sauceTypes.get(0));
         image.setImage("/media/PizzaSauce.png");
-    }//GEN-LAST:event_btnSauce1ActionPerformed
-
-    private void btnSauce2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSauce2ActionPerformed
+    }//GEN-LAST:event_btnSauceItalianActionPerformed
+    /**
+     * Adds pizza ingredients to the User Linked List
+     * @param evt 
+     */
+    private void btnSauceHomeMadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSauceHomeMadeActionPerformed
+        mediaPlayer.playWAV("/media/ButtonSound.wav"); 
         userList.add(sauceTypes.get(1));
-          image.setImage("/media/PizzaSauce.png");
-    }//GEN-LAST:event_btnSauce2ActionPerformed
-
-    private void btnSauce3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSauce3ActionPerformed
+        image.setImage("/media/PizzaSauce.png");
+    }//GEN-LAST:event_btnSauceHomeMadeActionPerformed
+    /**
+     * Adds pizza ingredients to the User Linked List
+     * @param evt 
+     */
+    private void btnSauceAmericanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSauceAmericanActionPerformed
+        mediaPlayer.playWAV("/media/ButtonSound.wav"); 
         userList.add(sauceTypes.get(2));
-          image.setImage("/media/PizzaSauce.png");
-    }//GEN-LAST:event_btnSauce3ActionPerformed
-
-    private void btnSauce4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSauce4ActionPerformed
+        image.setImage("/media/PizzaSauce.png"); 
+    }//GEN-LAST:event_btnSauceAmericanActionPerformed
+    /**
+     * Adds pizza ingredients to the User Linked List
+     * @param evt 
+     */
+    private void btnSauceSpicyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSauceSpicyActionPerformed
+        mediaPlayer.playWAV("/media/ButtonSound.wav"); 
         userList.add(sauceTypes.get(3));
-          image.setImage("/media/PizzaSauce.png");
-    }//GEN-LAST:event_btnSauce4ActionPerformed
-
-    private void btnSauce5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSauce5ActionPerformed
+        image.setImage("/media/PizzaSauce.png");
+    }//GEN-LAST:event_btnSauceSpicyActionPerformed
+    /**
+     * Adds pizza ingredients to the User Linked List
+     * @param evt 
+     */
+    private void btnSauceLouisianaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSauceLouisianaActionPerformed
+        mediaPlayer.playWAV("/media/ButtonSound.wav"); 
         userList.add(sauceTypes.get(4));
-          image.setImage("/media/PizzaSauce.png");
-    }//GEN-LAST:event_btnSauce5ActionPerformed
-
-    private void btnCheese1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheese1ActionPerformed
+        image.setImage("/media/PizzaSauce.png");
+    }//GEN-LAST:event_btnSauceLouisianaActionPerformed
+    /**
+     * Adds pizza ingredients to the User Linked List
+     * @param evt 
+     */
+    private void btnCheeseMozzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheeseMozzActionPerformed
+        mediaPlayer.playWAV("/media/ButtonSound.wav"); 
         image.setImage("/media/PizzaCheese.png");
-        userList.add(cheeseTypes.get(0));
-    }//GEN-LAST:event_btnCheese1ActionPerformed
-
-    private void btnCheese2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheese2ActionPerformed
-       image.setImage("/media/PizzaCheese.png");
-        userList.add(cheeseTypes.get(1));
-    }//GEN-LAST:event_btnCheese2ActionPerformed
-
-    private void btnCheese4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheese4ActionPerformed
-       image.setImage("/media/PizzaCheese.png");
+        userList.add(cheeseTypes.get(0)); 
+    }//GEN-LAST:event_btnCheeseMozzActionPerformed
+     /**
+     * Adds pizza ingredients to the User Linked List
+     * @param evt 
+     */
+    private void btnCheeseSwissActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheeseSwissActionPerformed
+        mediaPlayer.playWAV("/media/ButtonSound.wav"); 
+        image.setImage("/media/PizzaCheese.png");
+        userList.add(cheeseTypes.get(1)); 
+    }//GEN-LAST:event_btnCheeseSwissActionPerformed
+    /**
+     * Adds pizza ingredients to the User Linked List
+     * @param evt 
+     */
+    private void btnCheeseCheddarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheeseCheddarActionPerformed
+        mediaPlayer.playWAV("/media/ButtonSound.wav"); 
+        image.setImage("/media/PizzaCheese.png");
         userList.add(cheeseTypes.get(3));
-    }//GEN-LAST:event_btnCheese4ActionPerformed
-
-    private void btnCheese5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheese5ActionPerformed
-      image.setImage("/media/PizzaCheese.png");
+    }//GEN-LAST:event_btnCheeseCheddarActionPerformed
+    /**
+     * Adds pizza ingredients to the User Linked List
+     * @param evt 
+     */
+    private void btnCheeseProvoloneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheeseProvoloneActionPerformed
+        mediaPlayer.playWAV("/media/ButtonSound.wav"); 
+        image.setImage("/media/PizzaCheese.png");
         userList.add(cheeseTypes.get(4));
-    }//GEN-LAST:event_btnCheese5ActionPerformed
-
-    private void btnCheese6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheese6ActionPerformed
+    }//GEN-LAST:event_btnCheeseProvoloneActionPerformed
+    /**
+     * Adds pizza ingredients to the User Linked List
+     * @param evt 
+     */
+    private void btnCheeseParmesanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheeseParmesanActionPerformed
+         mediaPlayer.playWAV("/media/ButtonSound.wav"); 
         image.setImage("/media/PizzaCheese.png");
         userList.add(cheeseTypes.get(5));
-    }//GEN-LAST:event_btnCheese6ActionPerformed
-
-    private void btnTop1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTop1ActionPerformed
+    }//GEN-LAST:event_btnCheeseParmesanActionPerformed
+    /**
+     * Adds pizza ingredients to the User Linked List
+     * @param evt 
+     */
+    private void btnTopPeperoniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTopPeperoniActionPerformed
+        mediaPlayer.playWAV("/media/ButtonSound.wav"); 
+        image.setImage("/media/PizzaPeperoni.png");  
         userList.add(toppingTypes.get(0));
-    }//GEN-LAST:event_btnTop1ActionPerformed
-
-    private void btnTop2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTop2ActionPerformed
+    }//GEN-LAST:event_btnTopPeperoniActionPerformed
+    /**
+     * Adds pizza ingredients to the User Linked List
+     * @param evt 
+     */
+    private void btnTopHamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTopHamActionPerformed
+        mediaPlayer.playWAV("/media/ButtonSound.wav"); 
+        image.setImage("/media/PizzaSalamiAndHam.png");
         userList.add(toppingTypes.get(1));
-    }//GEN-LAST:event_btnTop2ActionPerformed
-
-    private void btnTop3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTop3ActionPerformed
-        userList.add(toppingTypes.get(2));
-    }//GEN-LAST:event_btnTop3ActionPerformed
-
-   
-
+    }//GEN-LAST:event_btnTopHamActionPerformed
+    /**
+     * Adds pizza ingredients to the User Linked List
+     * @param evt 
+     */
+    private void btnTopSalamiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTopSalamiActionPerformed
+        mediaPlayer.playWAV("/media/ButtonSound.wav"); //plays a nice sound on the click of the button
+        //from the package media (for future sounds add sounds o the media folder)
+        image.setImage("/media/PizzaSalamiAndHam.png");  //sets the picture from the media package
+        userList.add(toppingTypes.get(2)); 
+    }//GEN-LAST:event_btnTopSalamiActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCheese1;
-    private javax.swing.JButton btnCheese2;
-    private javax.swing.JButton btnCheese3;
-    private javax.swing.JButton btnCheese4;
-    private javax.swing.JButton btnCheese5;
-    private javax.swing.JButton btnCheese6;
+    private javax.swing.JButton btnCheeseCheddar;
+    private javax.swing.JButton btnCheeseMozz;
+    private javax.swing.JButton btnCheeseOld;
+    private javax.swing.JButton btnCheeseParmesan;
+    private javax.swing.JButton btnCheeseProvolone;
+    private javax.swing.JButton btnCheeseSwiss;
     private javax.swing.JButton btnDone;
-    private javax.swing.JButton btnDough1;
-    private javax.swing.JButton btnDough2;
-    private javax.swing.JButton btnDough3;
-    private javax.swing.JButton btnDough4;
-    private javax.swing.JButton btnDough5;
-    private javax.swing.JButton btnDough6;
-    private javax.swing.JButton btnSauce1;
-    private javax.swing.JButton btnSauce2;
-    private javax.swing.JButton btnSauce3;
-    private javax.swing.JButton btnSauce4;
-    private javax.swing.JButton btnSauce5;
-    private javax.swing.JButton btnSauce6;
-    private javax.swing.JButton btnTop1;
-    private javax.swing.JButton btnTop2;
-    private javax.swing.JButton btnTop3;
-    private javax.swing.JButton btnTop4;
-    private javax.swing.JButton btnTop5;
-    private javax.swing.JButton btnTop6;
+    private javax.swing.JButton btnDoughCheese;
+    private javax.swing.JButton btnDoughFull;
+    private javax.swing.JButton btnDoughItalian;
+    private javax.swing.JButton btnDoughSoft;
+    private javax.swing.JButton btnDoughThick;
+    private javax.swing.JButton btnDoughThin;
+    private javax.swing.JButton btnSauceAmerican;
+    private javax.swing.JButton btnSauceChipotle;
+    private javax.swing.JButton btnSauceHomeMade;
+    private javax.swing.JButton btnSauceItalian;
+    private javax.swing.JButton btnSauceLouisiana;
+    private javax.swing.JButton btnSauceSpicy;
+    private javax.swing.JButton btnTopHam;
+    private javax.swing.JButton btnTopMushroom;
+    private javax.swing.JButton btnTopPeperoni;
+    private javax.swing.JButton btnTopPepper;
+    private javax.swing.JButton btnTopPineApple;
+    private javax.swing.JButton btnTopSalami;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -559,87 +671,137 @@ public class UI extends javax.swing.JFrame {
     private javax.swing.JLabel lblOrder;
     private javax.swing.JLabel lblPic;
     private javax.swing.JLabel lblResponse;
+    private javax.swing.JLabel lblServed;
     private javax.swing.JLabel lblTimer;
     private javax.swing.JLabel lblTxt;
     private javax.swing.JLabel txtName;
     // End of variables declaration//GEN-END:variables
-
-    private void backgroundCheck(){
-        timer = new Timer(1000, new ActionListener(){
+    /**
+     * Runs the timer
+     * sets the money label
+     * checks for the time limit to hit 0
+     * Is constantly running
+     */
+    private void backgroundCheck() {
+        timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String cash = Integer.toString(money);
                 lblDisMoney.setText(cash);
                 time--;
                 lblTimer.setText(Integer.toString(time));
-                if (time == 0) { 
-                   lblResponse.setText("Forget it im leaving");
-                   time = 25;
-                   money--;
-                   lives--;
-                   redrawHearts();
+                if (time == 0) { //checks for the time limit
+                    lblResponse.setText("Forget it im leaving");
+                    checkTime();
+                    money--;
+                    lives--;
+                    redrawHearts();
+                }
             }
-            } 
         });
     }
-     private void displayStats() {
-                JOptionPane.showMessageDialog(null, "Game Over" + "\n" + 
-                        "You have served " + served + " Customers and got " + money + "$");
-            }
-    private void name() {
-      String text = "Welcome to Papa's pizzeria recruit, what shall we call you?"; 
-      String name = JOptionPane.showInputDialog(null,text);
-      if (name == null || name == ""){ // make the edge scenario thingy work
-        txtName.setText("Newbie");  //secret easter egg //pasta == music change
-      } 
-      txtName.setText(name);
+    /**
+     * Displays the players stats when he looses like amount served and money got
+     */
+    private void displayStats() {
+        JOptionPane.showMessageDialog(null, "Game Over" + "\n"
+                + "You have served " + served + " Customers and got " + money + "$");
     }
-
+    /**
+     * At the start of the game asks player for name.
+     * If null sets automatically a deafult name
+     */
+    private void name() {
+        String name;
+        String text = "Welcome to Papa's pizzeria recruit, what shall we call you?";
+        name = JOptionPane.showInputDialog(null, text);
+        if (name.equals("")) { // make the edge scenario thingy work
+            txtName.setText("Newbie"); //secret easter egg //pasta == music change
+        } else {
+            txtName.setText(name); //sets the label name to the choosen name
+        }
+    }
+    /**
+     * Compares the two linked lists (user list and generated order) 
+     * uses linkedList equal methods id two are equal money goes up and amount served goes up
+     * if not equal lives drop and money drops in addition customer spits out a response to the orders quality
+     * Spawns another customer if lives != 0. Also updates the labels
+     * @param order the customer generated order to check
+     * @param userList the user created linked list to check
+     */
     private void checkOrder(LinkedList<String> order, LinkedList<String> userList) {
-         if (userList.equals(order)){
-           order.finalize();
-           userList.finalize();
+        if (userList.equals(order)) { //LinkedList method that checks if the 2 lists are equal
+            order.finalize(); //cleans the generated order for the customer to reuse
+            userList.finalize();//cleans the userList for the next pizza order
             String cash = Integer.toString(money);
-            lblOrder.setText("");
-            lblResponse.setText("Thanks this is just what I wanted");
+            lblOrder.setText(""); // re sets order label
+            lblResponse.setText("Thanks this is just what I wanted"); //postive response
             money++;
             served++;
-            lblDisMoney.setText(cash);
-            time = 26;
-            spawnCustomer();    
-        }
-        else {
-           String cash = Integer.toString(money);
-           order.finalize();
-           userList.finalize();
-           lblOrder.setText("");
-            lblResponse.setText("Beh, and you call this place a 'Pizzeria'");
+            lblServed.setText("Served: " + served); //updates the served label
+            lblDisMoney.setText(cash); //updates the money label with the new amount
+            checkTime();
+            spawnCustomer();
+        } else {
+            String cash = Integer.toString(money);
+            order.finalize(); //cleans the generated order for the customer to reuse
+            userList.finalize(); //cleans the userList for the next pizza order
+            lblOrder.setText("");
+            lblResponse.setText("Beh, and you call this place a 'Pizzeria'"); //negative response
             lives--;
             money--;
             redrawHearts();
-            lblDisMoney.setText(cash);
-            time = 26;
-            spawnCustomer();
+            lblDisMoney.setText(cash); //updates the money label with the new amount
+            checkTime();
+            spawnCustomer(); 
         }
     }
-    
-    private void redrawHearts(){
-        if (lives == 2) lblHeart3.setVisible(false);
-        if (lives == 1) lblHeart2.setVisible(false);
-        if (lives == 0){ 
+    /**
+     * Is based on the amount of customers served and checks if the time 
+     * limit to cook a pizza needs to be reduced to increase the difficulty 
+     * for the player
+     */
+    private void checkTime() {
+        if (served >= 10) {
+            time = 11;
+        }
+        else if (served >= 5) {
+            time = 21;
+        } else {
+            time = 26;
+        }
+    }
+    /**
+     * Checks if hearts need to be redrawn based on the amount of lives the user still has
+     * if his lives decrease one heart goes away each time to a total of 3
+     * In addition it writes the end game data to save it in the data.txt file 
+     * to later open it in the constructor to read the last score 
+     */
+    private void redrawHearts() {
+        if (lives == 2) {
+            lblHeart3.setVisible(false);
+        }
+        if (lives == 1) {
+            lblHeart2.setVisible(false);
+        }
+        if (lives == 0) {
             lblHeart1.setVisible(false);
             String[] data = {
-              "" + money, "" + served  
+                "" + money, "" + served
             };
-            file.write(data);
-            displayStats();
-            System.exit(0);
+            file.write(data); //writes the score of the last user (
+            //customers served and money) to the data.txt file using
+            //fileHandler class
+            displayStats(); //calls the methods to display the stats
+            System.exit(0); //exits the game
         }
-        
     }
-    
-  private void spawnCustomer(){
-     order = customer.order(doughTypes, cheeseTypes, sauceTypes, toppingTypes);
-     lblOrder.setText(order.toString(order));
+    /**
+     * Spawns another customer which gives another order to the user to cook
+     * keeps spawning customers as long as user doesnt lose the game
+     */
+    private void spawnCustomer() {
+        order = customer.order(doughTypes, sauceTypes, cheeseTypes, toppingTypes);
+        lblOrder.setText(order.toString(order));
     }
 }

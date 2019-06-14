@@ -4,7 +4,9 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JOptionPane;
 /**
- *
+ * Menu class to greet the player with 
+ * @Since 10-May-2019
+ * @Instructor Mr.Wachs
  * @author r.stuchevsky
  */
 public class Menu extends javax.swing.JFrame {
@@ -12,9 +14,9 @@ public class Menu extends javax.swing.JFrame {
      * Creates new form Menu
      */
     public Menu() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        this.setVisible(true);
+        this.setVisible(true); //sets menu visible
         initComponents();
-        this.setSize(720,720);
+        this.setSize(720,720); //sets menu size
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -78,17 +80,17 @@ public class Menu extends javax.swing.JFrame {
      */
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         this.setVisible(false);
-        UI ui = new UI();
+        UI ui = new UI(); //starts the pizza game
     }//GEN-LAST:event_btnStartActionPerformed
     /**
      * Exits the game completly
      * @param evt 
      */
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        System.exit(0);
+        System.exit(0); // quits the menu
     }//GEN-LAST:event_btnExitActionPerformed
     /**
-     * Display the info
+     * Display the info of how to play
      * @param evt 
      */
     private void btnInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInfoActionPerformed
@@ -99,10 +101,6 @@ public class Menu extends javax.swing.JFrame {
                "Once you lost all three of your hearts its game over."+ "\n" + "Your money and customer "
                + "highscore will be saved for your next restart" + "\n" + "Good Luck and have fun!");
     }//GEN-LAST:event_btnInfoActionPerformed
-
-   
-    
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnInfo;
